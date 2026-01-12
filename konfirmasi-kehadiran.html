@@ -1,0 +1,232 @@
+<!-- SIMPAN SEBAGAI: form-konfirmasi.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Konfirmasi Karang Taruna</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #2E7D32, #1B5E20);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .form-container {
+            background: white;
+            width: 100%;
+            max-width: 600px;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #2E7D32;
+            margin-bottom: 10px;
+        }
+        
+        .event-info {
+            background: #E8F5E9;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-size: 0.9em;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            border-color: #2E7D32;
+            outline: none;
+        }
+        
+        .required::after {
+            content: " *";
+            color: #f44336;
+        }
+        
+        .btn-submit {
+            background: linear-gradient(135deg, #2E7D32, #4CAF50);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.3s;
+        }
+        
+        .btn-submit:hover {
+            transform: translateY(-3px);
+        }
+        
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            background: #E8F5E9;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .success-message i {
+            font-size: 50px;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="form-container">
+        <div class="header">
+            <i class="fas fa-users" style="font-size: 50px; color: #2E7D32; margin-bottom: 20px;"></i>
+            <h1>KONFIRMASI KEHADIRAN</h1>
+            <p>Karang Taruna "Bhakti Praja" Desa Sukamakmur</p>
+        </div>
+        
+        <div class="event-info">
+            <p><strong>📅 Acara:</strong> Rapat Perencanaan Kegiatan Sosial</p>
+            <p><strong>🗓️ Tanggal:</strong> Sabtu, 15 Juni 2024</p>
+            <p><strong>⏰ Waktu:</strong> 19.00 - 21.30 WIB</p>
+            <p><strong>📍 Tempat:</strong> Balai Desa Sukamakmur</p>
+        </div>
+        
+        <form id="confirmationForm">
+            <div class="form-group">
+                <label class="required">Nama Lengkap</label>
+                <input type="text" name="nama" required placeholder="Masukkan nama lengkap">
+            </div>
+            
+            <div class="form-group">
+                <label class="required">Nomor WhatsApp</label>
+                <input type="tel" name="whatsapp" required placeholder="081234567890">
+            </div>
+            
+            <div class="form-group">
+                <label class="required">Status Kehadiran</label>
+                <select name="status" required>
+                    <option value="">Pilih status</option>
+                    <option value="hadir">✅ Akan hadir tepat waktu</option>
+                    <option value="terlambat">⏰ Akan hadir (mungkin terlambat)</option>
+                    <option value="tidak">❌ Tidak bisa hadir</option>
+                    <option value="ragu">🤔 Masih ragu</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="required">Jumlah Orang</label>
+                <select name="jumlah" required>
+                    <option value="">Pilih jumlah</option>
+                    <option value="1">1 orang (hanya saya)</option>
+                    <option value="2">2 orang</option>
+                    <option value="3">3 orang atau lebih</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Saran untuk Karang Taruna</label>
+                <textarea name="saran" rows="3" placeholder="Masukkan saran atau ide Anda..."></textarea>
+            </div>
+            
+            <button type="submit" class="btn-submit">
+                <i class="fas fa-paper-plane"></i> KIRIM KONFIRMASI
+            </button>
+        </form>
+        
+        <div class="success-message" id="successMessage">
+            <i class="fas fa-check-circle"></i>
+            <h2>✅ KONFIRMASI BERHASIL!</h2>
+            <p>Terima kasih <span id="userName"></span> telah mengkonfirmasi kehadiran.</p>
+            <p>Kami telah mengirim detail ke WhatsApp Anda.</p>
+            <p style="margin-top: 20px;">
+                <a href="https://chat.whatsapp.com/yourgroup" 
+                   style="color: #25D366; text-decoration: none; font-weight: bold;">
+                    <i class="fab fa-whatsapp"></i> Gabung Grup WhatsApp
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('confirmationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Ambil data form
+            const formData = new FormData(this);
+            const nama = formData.get('nama');
+            
+            // Simpan ke localStorage (simulasi database)
+            const confirmation = {
+                nama: nama,
+                whatsapp: formData.get('whatsapp'),
+                status: formData.get('status'),
+                jumlah: formData.get('jumlah'),
+                saran: formData.get('saran'),
+                waktu: new Date().toLocaleString()
+            };
+            
+            // Simpan data
+            let data = JSON.parse(localStorage.getItem('konfirmasi') || '[]');
+            data.push(confirmation);
+            localStorage.setItem('konfirmasi', JSON.stringify(data));
+            
+            // Tampilkan pesan sukses
+            document.getElementById('userName').textContent = nama;
+            document.getElementById('confirmationForm').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // Kirim ke WhatsApp (simulasi)
+            const message = `Halo admin, saya ${nama} mengkonfirmasi kehadiran di rapat Karang Taruna. Status: ${formData.get('status')}, Jumlah: ${formData.get('jumlah')} orang.`;
+            console.log('Pesan WhatsApp yang akan dikirim:', message);
+            
+            // Link WhatsApp ke admin
+            const whatsappLink = `https://wa.me/6281234567890?text=${encodeURIComponent(message)}`;
+            console.log('Link WhatsApp:', whatsappLink);
+            
+            // Bisa tambahkan: window.open(whatsappLink, '_blank');
+        });
+        
+        // Untuk melihat data yang terkumpul (admin)
+        console.log('Untuk melihat data konfirmasi:');
+        console.log('1. Buka Developer Tools (F12)');
+        console.log('2. Masuk ke tab "Console"');
+        console.log('3. Ketik: localStorage.getItem("konfirmasi")');
+        console.log('4. Atau ketik: JSON.parse(localStorage.getItem("konfirmasi"))');
+    </script>
+</body>
+</html>
